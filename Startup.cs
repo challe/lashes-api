@@ -28,6 +28,7 @@ namespace test
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()));
             services.AddMvc();
         }
 
@@ -36,7 +37,8 @@ namespace test
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            
+            app.UseCors("AllowAll");
             app.UseMvc();
         }
     }
