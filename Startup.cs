@@ -38,7 +38,10 @@ namespace test
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             
-            app.UseCors("AllowAll");
+            app.UseCors(builder => {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            });
+            
             app.UseMvc();
         }
     }
