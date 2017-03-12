@@ -51,5 +51,17 @@ namespace test.Controllers
         
             return CreatedAtRoute("GetCustomer", new { controller = "Customers", id = customer.id }, customer);
         }
+
+        [HttpDelete("{id}", Name = "RemoveCustomer")]
+        public IActionResult Delete(int id)
+        {
+            using (var db = new DatabaseContext()) {
+                Customer customer = db.Customers.Find(id);
+                db.Remove(customer);
+                db.SaveChanges();
+            }
+   
+            return new NoContentResult();
+        }
     }
 }

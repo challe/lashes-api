@@ -1,0 +1,13 @@
+{
+  "name": "lashes-api",
+  "version": "1.0.0",
+  "description": "API for Lashes",
+  "main": "Program.cs",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sftp": "^0.1.5",
+    "gulp-shell": "*",
+    "gulp-util": "^3.0.8",
+    "run-sequence": "^1.2.2"
+  }
+}
