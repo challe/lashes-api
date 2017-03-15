@@ -59,9 +59,9 @@ namespace test.Controllers
                 Customer customer = db.Customers.Find(id);
                 db.Remove(customer);
                 db.SaveChanges();
+
+                return new ObjectResult(customer);
             }
-   
-            return new NoContentResult();
         }
     }
 }
