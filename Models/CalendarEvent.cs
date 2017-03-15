@@ -1,8 +1,8 @@
 namespace Lashes.Models
 {
-    public class Appointment
+    public class CalendarEvent
     {
-      public Appointment(string summary, string date) {
+      public CalendarEvent(string summary, string date) {
         this.summary = summary;
         this.date = date;
       }
