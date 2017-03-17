@@ -18,7 +18,7 @@ namespace test.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                return (from c in db.Customers orderby c.name select c).ToList();
+                return (from c in db.Customers orderby c.Name select c).ToList();
             }
         }
 
@@ -49,7 +49,7 @@ namespace test.Controllers
                 db.SaveChanges();
             }
         
-            return CreatedAtRoute("GetCustomer", new { controller = "Customers", id = customer.id }, customer);
+            return CreatedAtRoute("GetCustomer", new { controller = "Customers", id = customer.ID }, customer);
         }
 
         [HttpDelete("{id}", Name = "RemoveCustomer")]
