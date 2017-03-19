@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
 using Lashes.Database;
 using Lashes.Models;
 using System.Security.Cryptography.X509Certificates;
@@ -17,6 +17,12 @@ namespace test.Controllers
     public class AppointmentsController : Controller
     {        
         private static String CALENDAR_ID = "vlbetugajsl5bt8t1jrfqs4rm0@group.calendar.google.com";
+        private IHostingEnvironment _env;
+        
+        public AppointmentsController(IHostingEnvironment env)
+        {
+            _env = env;
+        }
 
         [HttpGet]
         public IEnumerable<Appointment> GetAll()
@@ -71,8 +77,8 @@ namespace test.Controllers
 
                 this.AddAppointmentToCalendar(appointment);
             }
-        
-            return new ObjectResult(appointment);
+
+            return CreatedAtRoute("GetAppointment", new { controller = "Appointments", id = appointment.ID }, appointment);
         }
 
         [HttpDelete("{id}", Name = "RemoveAppointment")]
@@ -133,7 +139,7 @@ namespace test.Controllers
         public CalendarService GetCalendarService() {
             String serviceAccountEmail = "calendar-fetcher@artful-mystery-161310.iam.gserviceaccount.com";
 
-            var certificate = new X509Certificate2(@"key.p12", "notasecret", X509KeyStorageFlags.Exportable);
+            var certificate = new X509Certificate2(System.IO.Path.Combine(_env.ContentRootPath, "key.p12"), "notasecret", X509KeyStorageFlags.Exportable);
 
             ServiceAccountCredential credential = new ServiceAccountCredential(
                new ServiceAccountCredential.Initializer(serviceAccountEmail)
