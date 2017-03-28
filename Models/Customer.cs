@@ -6,6 +6,7 @@ namespace Lashes.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public string PhoneNumber { get; set; }
         List<Appointment> Appointments { get; set; }
     }
 }

@@ -30,8 +30,7 @@ namespace test.Controllers
             using (var db = new DatabaseContext())
             {
                List<Appointment> appointments = (from a in db.Appointments
-                    join c in db.Customers
-                    on a.CustomerID equals c.ID
+                    join c in db.Customers on a.CustomerID equals c.ID
                     orderby a.FromTime descending
                     select new Appointment
                     {
@@ -39,7 +38,8 @@ namespace test.Controllers
                         FromTime = a.FromTime,
                         ToTime = a.ToTime,
                         CustomerID = a.CustomerID,
-                        Customer = c
+                        Customer = c,
+                        AppointmentLashes = db.AppointmentLashes.Select(l => l).Where(l => l.AppointmentID == a.ID).ToList()
                     }).ToList();
 
                 return appointments;

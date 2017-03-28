@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Lashes.Models
 {
@@ -9,5 +10,6 @@ namespace Lashes.Models
         public DateTime ToTime { get; set; }
         public int CustomerID { get; set; }
         public Customer Customer { get; set; }
+        public ICollection<AppointmentLash> AppointmentLashes { get; set; }
     }
 }

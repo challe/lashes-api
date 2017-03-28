@@ -12,8 +12,8 @@ namespace Lashes.Database
         }
         
         public DbSet<Customer> Customers { get; set; }
-
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<AppointmentLash> AppointmentLashes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
